@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Dealership Review</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -17,31 +18,33 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
   </head>
-
   <body>
     <!--Add a nav bar here -->
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'djangoapp:about' %}"
-            >About Us</a
+          <a class="navbar-brand" href="{% url 'djangoapp:index' %}"
+            >Best Car</a
           >
+          <a class="navbar-brand" href="#">About Us</a>
         </div>
       </div>
     </nav>
 
-    <!--Add a dealer table here -->
-    <footer
-      class="navbar navbar-light bg-light"
-      style="margin-top: 15px; bottom: 0; width: 100%"
-    >
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'djangoapp:contact' %}"
-            >Contact Us</a
-          >
-        </div>
+    <!-- Content -->
+    <br />
+    <div class="container">
+      <div class="page-header">
+        <h1>Best Cars</h1>
       </div>
-    </footer>
+      <hr />
+      <p>
+        Welcome to Best Cars dealership, home to the best cars in North
+        America/South America.
+      </p>
+      <p>We sell domestic and imported cars at reasonable prices.</p>
+    </div>
+
+    <!-- Footer Navbar -->
   </body>
 </html>

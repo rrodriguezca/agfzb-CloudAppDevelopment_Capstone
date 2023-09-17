@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Dealership Review</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -17,20 +18,31 @@
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
   </head>
-
   <body>
     <!--Add a nav bar here -->
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'djangoapp:about' %}"
+          <a class="navbar-brand" href="{% url 'djangoapp:contact' %}"
             >About Us</a
           >
         </div>
       </div>
     </nav>
 
-    <!--Add a dealer table here -->
+    <!-- Content -->
+    <br />
+    <div class="container">
+      <div class="page-header">
+        <h1>Contact</h1>
+      </div>
+      <hr />
+      <p>Office : Colombia, CO 110731, CO, Area 52</p>
+      <p>Email : bestcarever@dealership.com.co</p>
+      <p>Telphone : + 57 317 821 8113</p>
+    </div>
+
+    <!-- Footer Navbar -->
     <footer
       class="navbar navbar-light bg-light"
       style="margin-top: 15px; bottom: 0; width: 100%"
