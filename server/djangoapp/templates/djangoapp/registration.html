@@ -1,11 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-    <body>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <!-- Add Navbar -->
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'djangoapp:index' %}"
+            >Best Car</a
+          >
+          <a class="navbar-brand" href="{% url 'djangoapp:about' %}"
+            >About Us</a
+          >
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          <li>
+            <a class="btn btn-link" href="#"
+              >{{ user.first_name }}({{ user.username }})</a
+            >
+            <a class="btn btn-link" href="{% url 'djangoapp:logout' %}"
+              >Logout</a
+            >
+          </li>
+          {% else %}
+          <li>
+            <form
+              class="form-inline"
+              action="{% url 'djangoapp:login' %}"
+              method="post"
+            >
+              {% csrf_token %}
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Username"
+                  name="username"
+                />
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  name="psw"
+                />
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  style="margin-left: 5px"
+                >
+                  Login
+                </button>
+                <a
+                  class="btn btn-link"
+                  href="{% url 'djangoapp:registration' %}"
+                  >Sign Up</a
+                >
+              </div>
+            </form>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
     <!--Add a registration form here -->
-    </body>
+    <form action="{% url 'djangoapp:registration' %}" method="post">
+      <div class="container">
+        {% csrf_token %}
+        <h1>Sign Up</h1>
+        <hr />
+        <div class="form-group">
+          <label for="username"><b>Username:</b></label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Username..."
+            name="username"
+            required
+          />
+          <br />
+          <label for="firstname"><b>First Name:</b></label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your First Name..."
+            name="firstname"
+            required
+          />
+          <br />
+          <label for="lastname"><b>Last Name:</b></label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter your Last Name..."
+            name="lastname"
+            required
+          />
+          <br />
+          <label for="psw"><b>Password:</b></label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter Password..."
+            name="psw"
+            required
+          />
+          <br />
+          {% if message %}
+          <div class="alert alert-warning">{{ message }}</div>
+          {% endif %}
+          <button class="btn btn-primary" type="submit">Sign up</button>
+        </div>
+      </div>
+    </form>
+
+    <footer
+      class="navbar navbar-light bg-light"
+      style="margin-top: 15px; bottom: 0; width: 100%"
+    >
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'djangoapp:contact' %}"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
