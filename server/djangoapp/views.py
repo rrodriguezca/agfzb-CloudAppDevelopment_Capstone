@@ -88,7 +88,7 @@ def get_dealerships(request):
         # Get dealers from the Cloudant DB
         context["dealerships"] = get_dealers_from_cf(url)
         
- return render(request, 'djangoapp/index.html', context)
+        return render(request, 'djangoapp/index.html', context)
 
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
