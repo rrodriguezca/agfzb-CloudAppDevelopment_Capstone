@@ -1,8 +1,8 @@
 import requests
 import json
-from .models import CarDealer
+from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
-from .restapis import get_dealers_from_cf, get_dealer_by_id,get_dealers_by_state
+
 
 # Dealers Description
 DEALERSHIP_BASE_URL = "https://gennosukekog-3000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
@@ -99,4 +99,35 @@ def get_dealers_by_state(state):
                 zip=dealer.get("zip", "")
             )
             results.append(dealer_obj)
+
+    return results
+
+def get_dealer_reviews_from_cf(dealer_id):
+    # Call get_request with the base URL for reviews and dealerId parameter
+    url = REVIEWS_BASE_URL.format(dealer_id=dealer_id)
+    # Pass the API key to the get_request function
+    api_key = "ICBSot9ei2EgiQqH4n-MJqZnGqDs88T-mKaYJ6x01Rn4"
+    json_result = get_request(url, api_key=api_key)
+
+    results = []
+    if json_result:
+        for review_data in json_result:
+            # Check if all required fields exist in review_data
+            if "id" in review_data and "dealership" in review_data and "review" in review_data \
+                    and "purchase" in review_data and "purchase_date" in review_data \
+                    and "car_make" in review_data and "car_model" in review_data and "car_year" in review_data:
+                # If all fields are available, create the DealerReview object
+                dealer_review = DealerReview(
+                    review_id=review_data["id"],
+                    dealer_id=review_data["dealership"],
+                    review=review_data["review"],
+                    purchase=review_data["purchase"],
+                    purchase_date=review_data["purchase_date"],
+                    car_make=review_data["car_make"],
+                    car_model=review_data["car_model"],
+                    car_year=review_data["car_year"],
+                    sentiment=None
+                )
+                results.append(dealer_review)
+
     return results
