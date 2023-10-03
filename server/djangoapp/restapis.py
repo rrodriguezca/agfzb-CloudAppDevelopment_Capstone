@@ -34,6 +34,17 @@ def get_request(url, **kwargs):
     json_data = json.loads(response.text)
     return json_data
 
+def post_request(url, json_payload, dealerId, **kwargs):
+    try:
+        params = {}
+        if dealerId is not None:
+            params['dealerId'] = dealerId
+
+        response = requests.post(url, json=json_payload, params=params, **kwargs)
+        return response
+    except requests.exceptions.RequestException as e:
+        raise Exception(f'Error making POST request: {e}')
+    
 def get_dealers_from_cf(url, **kwargs):
     results = []
     state = kwargs.get("state")
@@ -131,3 +142,38 @@ def get_dealer_reviews_from_cf(dealer_id):
                 results.append(dealer_review)
 
     return results
+
+def analyze_review_sentiments(dealerreview):
+    # Define the URL for sentiment analysis
+    url = 'https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/04fb5180-4277-41ea-8cba-db7ed23166f5'
+
+    # Debugging: Print the review text
+    print("Review Text:", dealerreview.review)
+    # Construct the parameters from the dealerreview object
+    params = {
+        "text": dealerreview.review,
+        "version": "2022-04-07",
+        "features": "sentiment",
+        "return_analyzed_text": True
+    }
+
+    # Your API key for Watson NLU
+    api_key = 'KcEHWq4fLHhPYxwEYpgy64p6G4qQfd-_1n6voUwYXTXT'
+
+    try:
+        # Make the GET request to Watson NLU
+        response = get_request(url, api_key=api_key, **params)
+        
+        print("API Response:", response)  # Print the response for debugging
+
+        # Check if the response is successful
+        if "sentiment" in response:
+            sentiment = response["sentiment"]["document"]["label"]
+            print("Sentiment:", sentiment)  # Print the extracted sentiment for debugging
+            return sentiment
+        else:
+            return None
+    except Exception as e:
+        # Handle any exceptions here
+        print("Error analyzing sentiment:", str(e))
+        return None
