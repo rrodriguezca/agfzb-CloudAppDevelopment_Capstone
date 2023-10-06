@@ -6,6 +6,7 @@ from requests.auth import HTTPBasicAuth
 
 # Dealers Description
 DEALERSHIP_BASE_URL = "https://gennosukekog-3000.theiadocker-3-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
+REVIEWS_BASE_URL = 'https://gennosukekog-5000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/api/get_reviews?id={dealer_id}'
 
 def get_request(url, **kwargs):
     
